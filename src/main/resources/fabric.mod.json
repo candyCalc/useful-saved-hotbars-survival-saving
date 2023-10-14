@@ -1,26 +1,26 @@
 {
   "schemaVersion": 1,
-  "id": "quick-saved-hotbars",
+  "id": "useful-saved-hotbars",
   "version": "${version}",
-  "name": "Quick Saved Hotbars",
+  "name": "Useful Saved Hotbars",
   "description": "",
   "authors": [],
   "contact": {
-    "repo": "https://github.com/tobia/quick-saved-hotbars"
+    "repo": "https://github.com/tobia/useful-saved-hotbars"
   },
   "license": "MIT",
-  "icon": "assets/quick-saved-hotbars/icon.png",
+  "icon": "assets/useful-saved-hotbars/icon.png",
   "environment": "client",
   "entrypoints": {
     "client": [
-      "tobinio.quicksavedhotbars.client.QuickSavedHotbarsClient"
+      "tobinio.usefulsavedhotbars.client.UsefulSavedHotbarsClient"
     ],
     "main": [
-      "tobinio.quicksavedhotbars.QuickSavedHotbars"
+      "tobinio.usefulsavedhotbars.UsefulSavedHotbars"
     ]
   },
   "mixins": [
-    "quick-saved-hotbars.mixins.json"
+    "useful-saved-hotbars.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=${loader_version}",

@@ -1,16 +1,12 @@
-package tobinio.quicksavedhotbars.mixin;
+package tobinio.usefulsavedhotbars.mixin;
 
 import net.minecraft.client.Keyboard;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.GameModeSelectionScreen;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.gen.Accessor;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import tobinio.quicksavedhotbars.QuickSavedHotbars;
-import tobinio.quicksavedhotbars.client.QuickSavedHotbarsClient;
-import tobinio.quicksavedhotbars.client.SavedHotbarScreen;
+import tobinio.usefulsavedhotbars.client.UsefulSavedHotbarsClient;
+import tobinio.usefulsavedhotbars.client.SavedHotbarScreen;
 
 @Mixin (Keyboard.class)
 public abstract class KeyboardMixin {
@@ -20,7 +16,7 @@ public abstract class KeyboardMixin {
 
         KeyboardAccessor keyboardAccessor = (KeyboardAccessor) this;
 
-        if (QuickSavedHotbarsClient.QuickSavedHotbarKeyBinding.matchesKey(key, key)) {
+        if (UsefulSavedHotbarsClient.LoadSaveHotbarsKeyBinding.matchesKey(key, key)) {
             if (keyboardAccessor.getClient().player.isCreative()) {
                 keyboardAccessor.getClient().setScreen(new SavedHotbarScreen(keyboardAccessor.getClient()));
             } else {

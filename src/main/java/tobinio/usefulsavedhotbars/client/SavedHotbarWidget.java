@@ -1,9 +1,8 @@
-package tobinio.quicksavedhotbars.client;
+package tobinio.usefulsavedhotbars.client;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.screen.GameModeSelectionScreen;
 import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder;
 import net.minecraft.client.gui.widget.ClickableWidget;
 import net.minecraft.client.option.HotbarStorageEntry;
@@ -11,13 +10,13 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import tobinio.quicksavedhotbars.QuickSavedHotbars;
+import tobinio.usefulsavedhotbars.UsefulSavedHotbars;
 
 @Environment (EnvType.CLIENT)
 public class SavedHotbarWidget extends ClickableWidget {
 
-    public static final Identifier BASE_TEXTURE = new Identifier(QuickSavedHotbars.modID, "textures/gui/container/base.png");
-    public static final Identifier BOARDER_TEXTURE = new Identifier(QuickSavedHotbars.modID, "textures/gui/container/boarder.png");
+    public static final Identifier BASE_TEXTURE = new Identifier(UsefulSavedHotbars.modID, "textures/gui/container/base.png");
+    public static final Identifier BOARDER_TEXTURE = new Identifier(UsefulSavedHotbars.modID, "textures/gui/container/boarder.png");
 
 
     private boolean selected;

@@ -1,4 +1,4 @@
-package tobinio.quicksavedhotbars.client;
+package tobinio.usefulsavedhotbars.client;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -12,11 +12,9 @@ import net.minecraft.client.util.NarratorManager;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import org.lwjgl.glfw.GLFW;
-import tobinio.quicksavedhotbars.QuickSavedHotbars;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 @Environment (EnvType.CLIENT)
 public class SavedHotbarScreen extends Screen {
@@ -91,7 +89,7 @@ public class SavedHotbarScreen extends Screen {
 
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
-        if (QuickSavedHotbarsClient.QuickSavedHotbarKeyBinding.matchesKey(keyCode, scanCode)) {
+        if (UsefulSavedHotbarsClient.LoadSaveHotbarsKeyBinding.matchesKey(keyCode, scanCode)) {
             this.selected++;
             this.selected %= this.hotbarWidgets.size();
             this.mouseUsedForSelection = false;

@@ -1,4 +1,4 @@
-package tobinio.quicksavedhotbars.mixin;
+package tobinio.usefulsavedhotbars.mixin;
 
 import net.minecraft.client.Keyboard;
 import net.minecraft.client.MinecraftClient;
@@ -12,5 +12,5 @@ public interface KeyboardAccessor {
     MinecraftClient getClient();
 
     @Invoker ("debugLog")
-    public void invokeDebugLog(String key, Object... args);
+    void invokeDebugLog(String key, Object... args);
 }
