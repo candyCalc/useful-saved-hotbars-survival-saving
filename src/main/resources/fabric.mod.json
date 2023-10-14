@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "quick-saved-hotbars",
+  "version": "${version}",
+  "name": "Quick Saved Hotbars",
+  "description": "",
+  "authors": [],
+  "contact": {
+    "repo": "https://github.com/tobia/quick-saved-hotbars"
+  },
+  "license": "MIT",
+  "icon": "assets/quick-saved-hotbars/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "tobinio.quicksavedhotbars.client.QuickSavedHotbarsClient"
+    ],
+    "main": [
+      "tobinio.quicksavedhotbars.QuickSavedHotbars"
+    ]
+  },
+  "mixins": [
+    "quick-saved-hotbars.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
