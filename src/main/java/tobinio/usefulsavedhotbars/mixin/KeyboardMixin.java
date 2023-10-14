@@ -14,11 +14,25 @@ public abstract class KeyboardMixin {
     @Inject (method = "processF3", at = @At (value = "RETURN", ordinal = 17), cancellable = true)
     private void processF3(int key, CallbackInfoReturnable<Boolean> cir) {
 
+        //todo fix duplicated code
+
         KeyboardAccessor keyboardAccessor = (KeyboardAccessor) this;
 
-        if (UsefulSavedHotbarsClient.LoadSaveHotbarsKeyBinding.matchesKey(key, key)) {
+        if (UsefulSavedHotbarsClient.LoadHotbarsKeyBinding.matchesKey(key, key)) {
             if (keyboardAccessor.getClient().player.isCreative()) {
-                keyboardAccessor.getClient().setScreen(new SavedHotbarScreen(keyboardAccessor.getClient()));
+                keyboardAccessor.getClient()
+                        .setScreen(new SavedHotbarScreen(keyboardAccessor.getClient(), SavedHotbarScreen.Type.LOAD));
+            } else {
+                keyboardAccessor.invokeDebugLog("debug.gamemodes.error");
+            }
+
+            cir.setReturnValue(true);
+        }
+
+        if (UsefulSavedHotbarsClient.SaveHotbarsKeyBinding.matchesKey(key, key)) {
+            if (keyboardAccessor.getClient().player.isCreative()) {
+                keyboardAccessor.getClient()
+                        .setScreen(new SavedHotbarScreen(keyboardAccessor.getClient(), SavedHotbarScreen.Type.SAVE));
             } else {
                 keyboardAccessor.invokeDebugLog("debug.gamemodes.error");
             }

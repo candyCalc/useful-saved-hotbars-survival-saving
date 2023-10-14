@@ -10,8 +10,10 @@ import net.minecraft.client.option.HotbarStorageEntry;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.client.util.NarratorManager;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.item.ItemStack;
 import org.lwjgl.glfw.GLFW;
+import tobinio.usefulsavedhotbars.client.hotbarWidget.HotbarWidget;
+import tobinio.usefulsavedhotbars.client.hotbarWidget.LoadHotbarWidget;
+import tobinio.usefulsavedhotbars.client.hotbarWidget.SaveHotbarWidget;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +22,8 @@ import java.util.List;
 public class SavedHotbarScreen extends Screen {
 
     private final MinecraftClient client;
-    private final List<SavedHotbarWidget> hotbarWidgets;
+    private final Type type;
+    private final List<HotbarWidget> hotbarWidgets;
 
     private int selected = 0;
 
@@ -28,10 +31,12 @@ public class SavedHotbarScreen extends Screen {
     private int lastMouseY;
     private boolean mouseUsedForSelection;
 
-    public SavedHotbarScreen(MinecraftClient client) {
+    public SavedHotbarScreen(MinecraftClient client, Type type) {
         super(NarratorManager.EMPTY);
 
         this.client = client;
+        this.type = type;
+
         this.hotbarWidgets = new ArrayList<>();
     }
 
@@ -47,7 +52,10 @@ public class SavedHotbarScreen extends Screen {
         for (int i = 0; i < HotbarStorage.STORAGE_ENTRY_COUNT; i++) {
             HotbarStorageEntry hotbar = hotbars.getSavedHotbar(i);
 
-            this.hotbarWidgets.add(new SavedHotbarWidget(x, y + i * 16, i, hotbar));
+            switch (this.type) {
+                case LOAD -> this.hotbarWidgets.add(new LoadHotbarWidget(x, y + i * 16, i, hotbar, client));
+                case SAVE -> this.hotbarWidgets.add(new SaveHotbarWidget(x, y + i * 16, i, hotbar, client));
+            }
         }
     }
 
@@ -67,7 +75,7 @@ public class SavedHotbarScreen extends Screen {
 
         super.render(context, mouseX, mouseY, delta);
 
-        for (SavedHotbarWidget hotbarWidget : this.hotbarWidgets) {
+        for (HotbarWidget hotbarWidget : this.hotbarWidgets) {
             hotbarWidget.render(context, mouseX, mouseY, delta);
 
             hotbarWidget.setSelected(hotbarWidget.getHotbarIndex() == selected);
@@ -77,10 +85,13 @@ public class SavedHotbarScreen extends Screen {
         }
     }
 
+    //todo needs to return bool?
     private boolean checkForClose() {
         if (!InputUtil.isKeyPressed(this.client.getWindow().getHandle(), GLFW.GLFW_KEY_F3)) {
-            this.apply();
-            this.client.setScreen(null);
+
+            this.hotbarWidgets.get(selected).apply();
+            this.close();
+
             return true;
         } else {
             return false;
@@ -89,7 +100,7 @@ public class SavedHotbarScreen extends Screen {
 
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
-        if (UsefulSavedHotbarsClient.LoadSaveHotbarsKeyBinding.matchesKey(keyCode, scanCode)) {
+        if (UsefulSavedHotbarsClient.LoadHotbarsKeyBinding.matchesKey(keyCode, scanCode)) {
             this.selected++;
             this.selected %= this.hotbarWidgets.size();
             this.mouseUsedForSelection = false;
@@ -100,20 +111,8 @@ public class SavedHotbarScreen extends Screen {
         }
     }
 
-    public void apply() {
-        SavedHotbarWidget hotbarWidget = this.hotbarWidgets.get(this.selected);
-
-        for (int i = 0; i < hotbarWidget.getHotbar().size(); i++) {
-            ItemStack itemStack = hotbarWidget.getHotbar().get(i);
-
-            ItemStack itemStack2 = itemStack.isItemEnabled(this.client.world
-                    .getEnabledFeatures()) ? itemStack.copy() : ItemStack.EMPTY;
-            this.client.player.getInventory().setStack(i, itemStack2);
-            client.interactionManager.clickCreativeStack(itemStack2, 36 + i);
-        }
-
-        this.client.player.playerScreenHandler.sendContentUpdates();
-
-        super.close();
+    public enum Type {
+        LOAD,
+        SAVE
     }
 }
