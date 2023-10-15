@@ -71,8 +71,7 @@ public class SavedHotbarScreen extends Screen {
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
 
-        if (this.checkForClose())
-            return;
+        this.checkForClose();
 
         if (!this.mouseUsedForSelection) {
             this.lastMouseX = mouseX;
@@ -103,16 +102,11 @@ public class SavedHotbarScreen extends Screen {
         }
     }
 
-    //todo needs to return bool?
-    private boolean checkForClose() {
+    private void checkForClose() {
         if (!InputUtil.isKeyPressed(this.client.getWindow().getHandle(), GLFW.GLFW_KEY_F3)) {
 
             this.hotbarWidgets.get(selected).apply();
             this.close();
-
-            return true;
-        } else {
-            return false;
         }
     }
 
