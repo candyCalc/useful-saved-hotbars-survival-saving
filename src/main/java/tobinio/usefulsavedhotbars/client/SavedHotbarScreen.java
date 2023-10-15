@@ -1,5 +1,6 @@
 package tobinio.usefulsavedhotbars.client;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
@@ -9,8 +10,9 @@ import net.minecraft.client.option.HotbarStorage;
 import net.minecraft.client.option.HotbarStorageEntry;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.client.util.NarratorManager;
-import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.util.Identifier;
 import org.lwjgl.glfw.GLFW;
+import tobinio.usefulsavedhotbars.UsefulSavedHotbars;
 import tobinio.usefulsavedhotbars.client.hotbarWidget.HotbarWidget;
 import tobinio.usefulsavedhotbars.client.hotbarWidget.LoadHotbarWidget;
 import tobinio.usefulsavedhotbars.client.hotbarWidget.SaveHotbarWidget;
@@ -20,6 +22,11 @@ import java.util.List;
 
 @Environment (EnvType.CLIENT)
 public class SavedHotbarScreen extends Screen {
+
+    public static final Identifier BG_TEXTURE = new Identifier(UsefulSavedHotbars.modID, "textures/gui/container/background.png");
+
+    public static final int BG_WIDTH = 162;
+    public static final int BG_HEIGHT = 199;
 
     private final MinecraftClient client;
     private final Type type;
@@ -46,15 +53,17 @@ public class SavedHotbarScreen extends Screen {
 
         HotbarStorage hotbars = client.getCreativeHotbarStorage();
 
-        int x = (this.width / 2) - (PlayerInventory.getHotbarSize() * 16 / 2);
-        int y = (this.height / 2) - (HotbarStorage.STORAGE_ENTRY_COUNT * 16 / 2);
+        int x = (this.width / 2) - HotbarWidget.WIDTH / 2;
+        int y = (this.height / 2) - BG_HEIGHT / 2 + 24;
 
         for (int i = 0; i < HotbarStorage.STORAGE_ENTRY_COUNT; i++) {
             HotbarStorageEntry hotbar = hotbars.getSavedHotbar(i);
 
             switch (this.type) {
-                case LOAD -> this.hotbarWidgets.add(new LoadHotbarWidget(x, y + i * 16, i, hotbar, client));
-                case SAVE -> this.hotbarWidgets.add(new SaveHotbarWidget(x, y + i * 16, i, hotbar, client));
+                case LOAD ->
+                        this.hotbarWidgets.add(new LoadHotbarWidget(x, y + i * (HotbarWidget.HEIGHT - 1), i, hotbar, client));
+                case SAVE ->
+                        this.hotbarWidgets.add(new SaveHotbarWidget(x, y + i * (HotbarWidget.HEIGHT - 1), i, hotbar, client));
             }
         }
     }
@@ -74,6 +83,15 @@ public class SavedHotbarScreen extends Screen {
         boolean mouseHasNotMoved = this.lastMouseX == mouseX && this.lastMouseY == mouseY;
 
         super.render(context, mouseX, mouseY, delta);
+
+        RenderSystem.enableBlend();
+
+        context.drawTexture(BG_TEXTURE, this.width / 2 - BG_WIDTH / 2, this.height / 2 - BG_HEIGHT / 2, 0, 0, BG_WIDTH, BG_HEIGHT, BG_WIDTH, BG_HEIGHT);
+
+        String text = this.type == Type.SAVE ? "Save" : "Load";
+        text += " Hotbar " + (this.selected + 1);
+
+        context.drawCenteredTextWithShadow(this.textRenderer, text, this.width / 2, this.height / 2 - 92, -1);
 
         for (HotbarWidget hotbarWidget : this.hotbarWidgets) {
             hotbarWidget.render(context, mouseX, mouseY, delta);

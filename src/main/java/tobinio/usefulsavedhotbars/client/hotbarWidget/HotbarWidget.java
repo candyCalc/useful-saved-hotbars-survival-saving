@@ -15,6 +15,10 @@ import tobinio.usefulsavedhotbars.UsefulSavedHotbars;
 
 @Environment (EnvType.CLIENT)
 public abstract class HotbarWidget extends ClickableWidget {
+
+    public static final int WIDTH = 156;
+    public static final int HEIGHT = 20;
+
     protected final MinecraftClient client;
 
     protected boolean selected;
@@ -22,7 +26,7 @@ public abstract class HotbarWidget extends ClickableWidget {
     protected final int hotbarIndex;
 
     public HotbarWidget(int x, int y, int hotbarIndex, HotbarStorageEntry hotbar, MinecraftClient client) {
-        super(x, y, PlayerInventory.getHotbarSize() * 16, 16, Text.of("hotbar " + hotbarIndex));
+        super(x, y, WIDTH, HEIGHT, Text.of("hotbar " + hotbarIndex));
 
         this.hotbar = hotbar;
         this.hotbarIndex = hotbarIndex;

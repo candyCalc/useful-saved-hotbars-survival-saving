@@ -1,5 +1,6 @@
 package tobinio.usefulsavedhotbars.client.hotbarWidget;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
@@ -14,7 +15,7 @@ import tobinio.usefulsavedhotbars.UsefulSavedHotbars;
 public class LoadHotbarWidget extends HotbarWidget {
 
     public static final Identifier BASE_TEXTURE = new Identifier(UsefulSavedHotbars.modID, "textures/gui/container/base.png");
-    public static final Identifier BOARDER_TEXTURE = new Identifier(UsefulSavedHotbars.modID, "textures/gui/container/boarder.png");
+    public static final Identifier BOARDER_TEXTURE = new Identifier(UsefulSavedHotbars.modID, "textures/gui/container/selected.png");
 
     public LoadHotbarWidget(int x, int y, int hotbarIndex, HotbarStorageEntry hotbar, MinecraftClient client) {
         super(x, y, hotbarIndex, hotbar, client);
@@ -22,12 +23,14 @@ public class LoadHotbarWidget extends HotbarWidget {
 
     @Override
     public void renderButton(DrawContext context, int mouseX, int mouseY, float delta) {
-        context.drawTexture(BASE_TEXTURE, this.getX(), this.getY(), 0, 0, this.getWidth(), this.getHeight());
+        RenderSystem.enableBlend();
+
+        context.drawTexture(BASE_TEXTURE, this.getX(), this.getY(), 0, 0, this.getWidth(), this.getHeight(), this.getWidth(), this.getHeight());
 
         for (int i = 0; i < PlayerInventory.getHotbarSize(); i++) {
             ItemStack itemStack = hotbar.get(i);
 
-            context.drawItem(itemStack, this.getX() + i * 16, this.getY());
+            context.drawItem(itemStack, this.getX() + i * 16 + 2, this.getY() + 2);
         }
 
         if (this.selected) {
