@@ -112,7 +112,7 @@ public class SavedHotbarScreen extends Screen {
 
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
-        if (UsefulSavedHotbarsClient.LoadHotbarsKeyBinding.matchesKey(keyCode, scanCode)) {
+        if (toggleKeyPressed(keyCode, scanCode)) {
             this.selected++;
             this.selected %= this.hotbarWidgets.size();
             this.mouseUsedForSelection = false;
@@ -120,6 +120,20 @@ public class SavedHotbarScreen extends Screen {
             return true;
         } else {
             return super.keyPressed(keyCode, scanCode, modifiers);
+        }
+    }
+
+    private boolean toggleKeyPressed(int keyCode, int scanCode) {
+        switch (this.type) {
+            case LOAD -> {
+                return UsefulSavedHotbarsClient.LoadHotbarsKeyBinding.matchesKey(keyCode, scanCode);
+            }
+            case SAVE -> {
+                return UsefulSavedHotbarsClient.SaveHotbarsKeyBinding.matchesKey(keyCode, scanCode);
+            }
+            default -> {
+                return false;
+            }
         }
     }
 
