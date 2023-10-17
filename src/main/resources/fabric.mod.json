@@ -3,13 +3,18 @@
   "id": "useful-saved-hotbars",
   "version": "${version}",
   "name": "Useful Saved Hotbars",
-  "description": "",
-  "authors": [],
+  "description": "quickly load/save saved-hotbars",
+  "authors": [
+    "ToBinio"
+  ],
   "contact": {
-    "repo": "https://github.com/tobia/useful-saved-hotbars"
+    "repo": "https://github.com/toBinio/useful-saved-hotbars",
+    "homepage": "https://github.com/toBinio/useful-saved-hotbars",
+    "issues": "https://github.com/toBinio/useful-saved-hotbars/issues",
+    "sources": "https://github.com/toBinio/useful-saved-hotbars"
   },
   "license": "MIT",
-  "icon": "assets/useful-saved-hotbars/icon.png",
+  "icon": "assets/useful_saved_hotbars/icon.png",
   "environment": "client",
   "entrypoints": {
     "client": [
