@@ -7,10 +7,10 @@ Now you don't have to remember which saved-hotbar has which number you can simpl
 
 ## usage
 
-Press f3 + f5 to open the loading screen. Keep f3 pressed when you let go the currently selected hotbar will be loaded.
-select with your mouse a hotbar or press f5 to switch between the saved hotbars.
+Press f3 + f6 to open the loading screen. Keep f3 pressed when you let go the currently selected hotbar will be loaded.
+select with your mouse a hotbar or press f6 to switch between the saved hotbars.
 
-The same is possible with f3 + f6 only this time you save a saved-hotbar.
+The same is possible with f3 + f7 only this time you save a saved-hotbar.
 
 ### features
 

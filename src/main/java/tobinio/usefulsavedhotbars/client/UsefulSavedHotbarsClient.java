@@ -16,7 +16,7 @@ public class UsefulSavedHotbarsClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        LoadHotbarsKeyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.usefulsavedhotbars.load", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_F5, "category.usefulsavedhotbars.savedhotbar"));
-        SaveHotbarsKeyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.usefulsavedhotbars.save", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_F6, "category.usefulsavedhotbars.savedhotbar"));
+        LoadHotbarsKeyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.usefulsavedhotbars.load", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_F6, "category.usefulsavedhotbars.savedhotbar"));
+        SaveHotbarsKeyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.usefulsavedhotbars.save", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_F7, "category.usefulsavedhotbars.savedhotbar"));
     }
 }
