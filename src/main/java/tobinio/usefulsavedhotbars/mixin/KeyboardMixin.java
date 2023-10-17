@@ -12,7 +12,7 @@ import tobinio.usefulsavedhotbars.client.SavedHotbarScreen;
 @Mixin (Keyboard.class)
 public abstract class KeyboardMixin {
 
-    @Inject (method = "processF3", at = @At (value = "RETURN", ordinal = 17), cancellable = true)
+    @Inject (method = "processF3", at = @At (value = "TAIL"), cancellable = true)
     private void processF3(int key, CallbackInfoReturnable<Boolean> cir) {
 
         KeyboardAccessor keyboardAccessor = (KeyboardAccessor) this;
