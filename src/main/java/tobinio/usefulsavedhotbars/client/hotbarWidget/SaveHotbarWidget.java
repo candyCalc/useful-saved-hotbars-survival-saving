@@ -10,7 +10,6 @@ import net.minecraft.client.option.HotbarStorage;
 import net.minecraft.client.option.HotbarStorageEntry;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import tobinio.usefulsavedhotbars.UsefulSavedHotbars;
 
@@ -24,8 +23,9 @@ public class SaveHotbarWidget extends HotbarWidget {
         super(x, y, hotbarIndex, hotbar, client);
     }
 
+
     @Override
-    public void renderButton(DrawContext context, int mouseX, int mouseY, float delta) {
+    public void renderWidget(DrawContext context, int mouseX, int mouseY, float delta) {
         RenderSystem.enableBlend();
 
         context.drawTexture(BASE_TEXTURE, this.getX(), this.getY(), 0, 0, this.getWidth(), this.getHeight(), this.getWidth(), this.getHeight());

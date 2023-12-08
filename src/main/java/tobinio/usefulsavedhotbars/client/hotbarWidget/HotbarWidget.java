@@ -49,7 +49,10 @@ public abstract class HotbarWidget extends ClickableWidget {
         return hotbarIndex;
     }
 
-    public abstract void renderButton(DrawContext context, int mouseX, int mouseY, float delta);
+    @Override
+    protected void renderWidget(DrawContext context, int mouseX, int mouseY, float delta) {
+        
+    }
 
     public abstract void apply();
 }

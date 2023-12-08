@@ -22,7 +22,7 @@ public class LoadHotbarWidget extends HotbarWidget {
     }
 
     @Override
-    public void renderButton(DrawContext context, int mouseX, int mouseY, float delta) {
+    public void renderWidget(DrawContext context, int mouseX, int mouseY, float delta) {
         RenderSystem.enableBlend();
 
         context.drawTexture(BASE_TEXTURE, this.getX(), this.getY(), 0, 0, this.getWidth(), this.getHeight(), this.getWidth(), this.getHeight());
