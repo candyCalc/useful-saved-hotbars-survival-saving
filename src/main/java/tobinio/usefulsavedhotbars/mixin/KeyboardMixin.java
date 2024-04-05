@@ -29,13 +29,8 @@ public abstract class KeyboardMixin {
     @Unique
     private static void setSavedHotbarScreen(KeyboardAccessor keyboardAccessor, SavedHotbarScreen.Type save,
             CallbackInfoReturnable<Boolean> cir) {
-        if (keyboardAccessor.getClient().player.isCreative()) {
             keyboardAccessor.getClient()
                     .setScreen(new SavedHotbarScreen(keyboardAccessor.getClient(), save));
-        } else {
-            keyboardAccessor.invokeDebugLog("debug.gamemodes.error");
-        }
-
         cir.setReturnValue(true);
     }
 }
